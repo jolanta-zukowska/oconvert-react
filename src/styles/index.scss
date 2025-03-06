@@ -1,0 +1,27 @@
+// --- Fonts ---
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+// --- Variables --- 
+@use './vars';
+
+// --- Reset ---
+* {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+button {
+  color: inherit;
+  background-color: inherit;
+  border: none;
+}
+
+// --- Commons --- 
+body {
+  font-family: "League Spartan";
+  background-color: vars.$color-alt;
+}
