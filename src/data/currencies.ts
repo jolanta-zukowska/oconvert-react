@@ -1,8 +1,8 @@
-export interface Currency {
-    description: string;
-    code: string;
-    rate: number;
-  }
+// export interface Currency {
+//     description: string;
+//     code: string;
+//     rate: number;
+//   }
   
   export default [
     {
@@ -165,4 +165,6 @@ export interface Currency {
       code: "ZAR",
       rate: 20.346121,
     },
-  ] as Currency[];
+  ];
+  
+  // as Currency[];
