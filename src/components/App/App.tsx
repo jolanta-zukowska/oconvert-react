@@ -1,6 +1,16 @@
 import React from 'react';
-import './styles/App.scss'
+import './App.scss'
+// on importe le tableau des devises "currencies.ts" dans le fichier App.tsx
+import '../../data/currencies.ts'
 
+// on déclare une variable "currencies" qui contient le tableau des devises "currencies.ts"
+// on utilise la méthode map pour transformer le tableau des devises en un tableau d'éléments JSX
+// on affiche les devises dans la liste des devises
+
+const currencies = [];
+console.log(currencies);
+
+// et avec map transforme le en un tableau d'elements JSX pour afficher les devises.
 
 function App() {
 	return (
