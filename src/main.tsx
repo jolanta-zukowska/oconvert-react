@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.scss'
 import App from './components/App/App.tsx'
@@ -10,7 +10,7 @@ import App from './components/App/App.tsx'
 // on utilise la balise <StrictMode> pour afficher les erreurs dans la console
 // ===> on importe le composant APP dans le fichier "main.tsx"
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  <React.StrictMode>
     <App />
-  </StrictMode>,
+  </React.StrictMode>,
 )
