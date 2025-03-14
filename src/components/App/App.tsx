@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.scss'
+import Footer from '../Footer/Footer';
 // on importe le tableau des devises "currencies.ts" dans le fichier App.tsx
 // pour faire avec "map" un tableau d'éléments JSX pour afficher les devises
 import currencyList from '../../data/currencies';
+import Header from '../Header/Header';
 
 // *** ATTENTION les noms de variables et de fichiers sont importants et s'écrivent avec les minuscules ===> data / currencies / listOfCurrencies / listCurrencies etc. ***
 
@@ -38,9 +40,7 @@ function App() {
 
 	// !!! myCurrency est un OBJET qui contient les propriétés suivantes: code, description, rate 
 
-	// STATE N°2 pour stocker et afficher ou npn toutes les décimales de taux de change
-	const [isShort, setIsShort] = React.useState(false);
-
+	// *** A chaque fois qu'on a une donnée qu'on veut rendre évolutive ===> on la place dans un STATE et le STATE on le place dans le JSX ***
 
 	const tableauLi = currencyList.map ((currency) => {
 		// ici pour chaque item de tableau "currencies" on retourne un élément JSX  sous forme de <li>
@@ -49,10 +49,13 @@ function App() {
 		// la fonction MAP permet de transformer le fichier de data (= tableau de devises // array ) en un tableau d'éléments JSX
 		return (
 				<li 
-			// si la devise qu'on dessine ici dans la liste est égale à la devise séléctionnée par utilisateur ===> on lui ajoute une classe en plus ===> "selected", sinon elle garde uniquement la clsse "currency"
-			// on utilise la condition ternaire pour ajouter une classe en plus à la devise sélectionnée
-			// si la devise qu'on dessine ici dans la liste est égale à la devise sélectionnée par l'utilisateur : on lui ajoute une classe en plus : "selected"
-			// sinon elle garde uniquement la classe "currency" 
+				key={currency.code} // Ajout d'une clé unique basée sur le code de la devise
+				// *** Each child in a list should have a unique "key" prop ***
+
+			  	// si la devise qu'on dessine ici dans la liste est égale à la devise séléctionnée par utilisateur ===> on lui ajoute une classe en plus ===> "selected", sinon elle garde uniquement la clsse "currency"
+				// on utilise la condition ternaire pour ajouter une classe en plus à la devise sélectionnée
+				// si la devise qu'on dessine ici dans la liste est égale à la devise sélectionnée par l'utilisateur : on lui ajoute une classe en plus : "selected"
+				// sinon elle garde uniquement la classe "currency" 
 				className={
 				myCurrency === currency ? "currency selected" : "currency"
 				}>
@@ -65,7 +68,7 @@ function App() {
 				setMyCurrency(currency);
 				}}
 				>
-			 
+			
 			{/* United States Dollar */}
 			{currency.description}
 		</button>
@@ -76,10 +79,7 @@ function App() {
 
 	return (
 		<div className="app">
-			<header className="header">
-				<h1 className="header__title">Converter</h1>
-				<div className="header__value">1 euro</div>
-			</header>
+			<Header/>
 
 			<ul className="currencies">
 
@@ -107,18 +107,23 @@ function App() {
 
 			</ul>
 
-			<footer className="result">
-				{/* <div className="result__amount">1.09</div> */}
-				<div className="result__amount">{isShort ? Math.round(myCurrency.rate) : myCurrency.rate}</div>
-				{/* <div className="result__currency">United States Dollar</div> */}
-				<div className="result__currency">{myCurrency.description}</div>
-				<button type="button" className="result__button"
-				onClick={()=> {
-					setIsShort(!isShort);
-				}}>Arrondir le taux</button>
-			</footer>
+			{/* on migre le html de Footer vers le composant séparé Footer.tsx */}
+			<Footer myCurrency={myCurrency}/>
 		</div>
 	);
 }
 
 export default App;
+
+// Pour afficher deux chiffres après la virgule au lieu d'arrondir à l'entier le plus proche, vous pouvez utiliser la méthode toFixed(2) au lieu de Math.round(). Voici comment modifier votre code :
+// Au lieu de :
+
+// <div className="result__amount">
+// {isShort ? Math.round(myCurrency.rate) : myCurrency.rate}
+// </div>
+
+// Utilisez :
+
+// <div className="result__amount">
+// {isShort ? Number(myCurrency.rate).toFixed(2) : myCurrency.rate}
+// </div>
