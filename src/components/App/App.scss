@@ -39,29 +39,4 @@
     color: vars.$color-main;
     overflow: scroll;
   }
-
-  .currency {
-    font-size: 1.5rem;
-    border-top: 1px solid vars.$color-alt;
-    transition: background-color 1s;
-    
-    &:hover {
-      background-color: vars.$color-alt;
-      transition: background-color 0.2s;
-    }
-
-    &__button {
-      width: 100%;
-      font-size: 1rem;
-      font-weight: 400;
-      cursor: pointer;
-      padding: 1rem;
-    }
-  }
-
-  .selected {
-    background-color: vars.$color-contrast;
-    color : white;
-  }
-  
 }

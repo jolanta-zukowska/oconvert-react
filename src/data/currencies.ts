@@ -1,4 +1,4 @@
-export interface Currency {
+export interface ICurrency {
     description: string;
     code: string;
     rate: number;
@@ -165,4 +165,4 @@ export interface Currency {
       code: "ZAR",
       rate: 20.346121,
     },
-  ] as Currency[];
+  ] as ICurrency[];

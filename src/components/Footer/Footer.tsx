@@ -1,12 +1,12 @@
 
 // Import de la librairie React
 import React from "react";
-import { Currency } from "../../data/currencies";
+import { ICurrency } from "../../data/currencies";
 import "./Footer.scss";
 
 interface FooterProps {
     // ainsi "myCurrency" est de type "Currency" (et le typage = interface = est définie le fichier "currencies.ts")
-    myCurrency: Currency;
+    myCurrency: ICurrency;
 }
 
 // Création du composant Footer

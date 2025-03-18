@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.scss'
-import Footer from '../Footer/Footer';
+
 // on importe le tableau des devises "currencies.ts" dans le fichier App.tsx
 // pour faire avec "map" un tableau d'éléments JSX pour afficher les devises
 import currencyList from '../../data/currencies';
+
+// import des sous-composants Header et Footer
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Currency from '../Currency/Currency';
 
 // *** ATTENTION les noms de variables et de fichiers sont importants et s'écrivent avec les minuscules ===> data / currencies / listOfCurrencies / listCurrencies etc. ***
 
@@ -22,7 +26,7 @@ console.log(currencies);
 
 function App() {
 
-	// STATE N°1 pour stocker & afficher la devise sélectionnée (=la devise courante)
+	// STATE N°1 pour stocker & afficher la devise sélectionnée (= la devise courante)
 	// on utilise le hook useState pour stocker la devise sélectionnée
 	// QUAND LA DEVISE VA CHNAGER (= nouveau choix d'user) ON VA METTRE A JOUR LE STATE et redessiner l'affichage de la page
 
@@ -30,13 +34,13 @@ function App() {
 	// - code: string
 	// - description: string
 	// - rate: number
-	// on initialise le state avec la devise par défaut (1ère devise du tableau des devises)
+	// on initialise le state avec la devise par défaut (= 1ère devise du tableau des devises)
 	// on utilise la méthode "useState" pour stocker la devise sélectionnée
 	// on utilise la méthode "setSelectedCurrency" pour mettre à jour la devise sélectionnée	
 
 	const [myCurrency, setMyCurrency] = React.useState(currencyList[0]);
 	console.log(myCurrency);
-	// LA VALEUR INITIALE : première ligne de tableau donc index [0]
+	// LA VALEUR INITIALE : on prend la première ligne de tableau donc index [0]
 
 	// !!! myCurrency est un OBJET qui contient les propriétés suivantes: code, description, rate 
 
@@ -48,31 +52,13 @@ function App() {
 		// et le code de la devise ===>
 		// la fonction MAP permet de transformer le fichier de data (= tableau de devises // array ) en un tableau d'éléments JSX
 		return (
-				<li 
-				key={currency.code} // Ajout d'une clé unique basée sur le code de la devise
-				// *** Each child in a list should have a unique "key" prop ***
-
-			  	// si la devise qu'on dessine ici dans la liste est égale à la devise séléctionnée par utilisateur ===> on lui ajoute une classe en plus ===> "selected", sinon elle garde uniquement la clsse "currency"
-				// on utilise la condition ternaire pour ajouter une classe en plus à la devise sélectionnée
-				// si la devise qu'on dessine ici dans la liste est égale à la devise sélectionnée par l'utilisateur : on lui ajoute une classe en plus : "selected"
-				// sinon elle garde uniquement la classe "currency" 
-				className={
-				myCurrency === currency ? "currency selected" : "currency"
-				}>
-
-				<button className="currency__button" type="button" onClick={() => {
-				// quand on clique sur une devise : on veut placer la devise clicquée dans le state "myCurrency"
-				// on utilise la méthode "setMyCurrency" pour mettre à jour la devise sélectionnée
-				// on met à jour le state "myCurrency" avec la devise sélectionnée
-				// ce qui va redeclencher le rendu de App et afficher la nouvelle devise sélectionnée
-				setMyCurrency(currency);
-				}}
-				>
-			
-			{/* United States Dollar */}
-			{currency.description}
-		</button>
-	</li>
+				<Currency 
+				currency={currency} // ici il 'agit de la devise courante à afficher (= la ligne du tableau )
+				setMyCurrency={setMyCurrency} // ici il s'agit de la devise sélectionnée : pour changer le choix de devise tu utiliseras cette fonction-là == il s'agit de la fonction qui permet de changer la devise sélectionnée
+				// setMyCurrency c'est là où au clic on change la devise courante
+				myCurrency={myCurrency} // ici il s'agit de la devise sélectionnée à afficher (= mon choix en cours )
+				key={currency.code}
+				/>
 		);
 	});
 	console.log(tableauLi);
